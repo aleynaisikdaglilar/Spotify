@@ -30,6 +30,7 @@
 		744436852CD4EA6400B28D37 /* Artist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744436842CD4EA6400B28D37 /* Artist.swift */; };
 		744436872CD4EA7300B28D37 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744436862CD4EA7300B28D37 /* UserProfile.swift */; };
 		744436892CD7C41100B28D37 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744436882CD7C41100B28D37 /* Extensions.swift */; };
+		7444368B2CDB8B1200B28D37 /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7444368A2CDB8B1200B28D37 /* AuthResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +59,7 @@
 		744436842CD4EA6400B28D37 /* Artist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artist.swift; sourceTree = "<group>"; };
 		744436862CD4EA7300B28D37 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		744436882CD7C41100B28D37 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		7444368A2CDB8B1200B28D37 /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +127,7 @@
 				744436822CD4EA5C00B28D37 /* AudioTrack.swift */,
 				744436842CD4EA6400B28D37 /* Artist.swift */,
 				744436862CD4EA7300B28D37 /* UserProfile.swift */,
+				7444368A2CDB8B1200B28D37 /* AuthResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 				744436732CD4E81300B28D37 /* ProfileViewController.swift in Sources */,
 				744436632CD42D4B00B28D37 /* TabBarViewController.swift in Sources */,
 				7444367F2CD4E8EC00B28D37 /* HapticsManager.swift in Sources */,
+				7444368B2CDB8B1200B28D37 /* AuthResponse.swift in Sources */,
 				744436832CD4EA5C00B28D37 /* AudioTrack.swift in Sources */,
 				7444364D2CD4297800B28D37 /* HomeViewController.swift in Sources */,
 				7444366D2CD4E76200B28D37 /* AuthViewController.swift in Sources */,

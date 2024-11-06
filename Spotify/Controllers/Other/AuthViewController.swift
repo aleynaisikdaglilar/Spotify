@@ -67,6 +67,13 @@ class AuthViewController: UIViewController, WKNavigationDelegate {
             if url.absoluteString.starts(with: "spotify-ios-quick-start://spotify-login-callback") {
                 if let code = URLComponents(string: url.absoluteString)?.queryItems?.first(where: { $0.name == "code" })?.value {
                     print("Code: \(code)")
+                    webView.isHidden = true
+                    AuthManager.shared.exchangeCodeForToken(code: code) { [weak self] success in
+                        DispatchQueue.main.async {
+                            self?.navigationController?.popToRootViewController(animated: true)
+                            self?.completionHandler?(success)
+                        }
+                    }
                     // Kodla ilgili işlemleri burada gerçekleştirin
                 } else {
                     print("Kod parametresi yok.")
