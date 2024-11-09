@@ -31,6 +31,9 @@
 		744436872CD4EA7300B28D37 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744436862CD4EA7300B28D37 /* UserProfile.swift */; };
 		744436892CD7C41100B28D37 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744436882CD7C41100B28D37 /* Extensions.swift */; };
 		7444368B2CDB8B1200B28D37 /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7444368A2CDB8B1200B28D37 /* AuthResponse.swift */; };
+		7444368D2CDE104F00B28D37 /* SettingsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7444368C2CDE104F00B28D37 /* SettingsModels.swift */; };
+		744436902CDF906A00B28D37 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 7444368F2CDF906A00B28D37 /* SDWebImage */; };
+		744436922CDF906A00B28D37 /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 744436912CDF906A00B28D37 /* SDWebImageMapKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +63,7 @@
 		744436862CD4EA7300B28D37 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		744436882CD7C41100B28D37 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		7444368A2CDB8B1200B28D37 /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
+		7444368C2CDE104F00B28D37 /* SettingsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModels.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +71,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				744436922CDF906A00B28D37 /* SDWebImageMapKit in Frameworks */,
+				744436902CDF906A00B28D37 /* SDWebImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,6 +134,7 @@
 				744436842CD4EA6400B28D37 /* Artist.swift */,
 				744436862CD4EA7300B28D37 /* UserProfile.swift */,
 				7444368A2CDB8B1200B28D37 /* AuthResponse.swift */,
+				7444368C2CDE104F00B28D37 /* SettingsModels.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -201,6 +208,10 @@
 			dependencies = (
 			);
 			name = Spotify;
+			packageProductDependencies = (
+				7444368F2CDF906A00B28D37 /* SDWebImage */,
+				744436912CDF906A00B28D37 /* SDWebImageMapKit */,
+			);
 			productName = Spotify;
 			productReference = 744436452CD4297800B28D37 /* Spotify.app */;
 			productType = "com.apple.product-type.application";
@@ -229,6 +240,10 @@
 				Base,
 			);
 			mainGroup = 7444363C2CD4297800B28D37;
+			packageReferences = (
+				7444368E2CDF906A00B28D37 /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				744436932CDF923B00B28D37 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = 744436462CD4297800B28D37 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -272,6 +287,7 @@
 				744436892CD7C41100B28D37 /* Extensions.swift in Sources */,
 				744436672CD42DD000B28D37 /* LibraryViewController.swift in Sources */,
 				744436852CD4EA6400B28D37 /* Artist.swift in Sources */,
+				7444368D2CDE104F00B28D37 /* SettingsModels.swift in Sources */,
 				744436772CD4E86400B28D37 /* PlaylistViewController.swift in Sources */,
 				7444364B2CD4297800B28D37 /* SceneDelegate.swift in Sources */,
 				744436752CD4E81E00B28D37 /* PlayerViewController.swift in Sources */,
@@ -487,6 +503,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		7444368E2CDF906A00B28D37 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.20.0;
+			};
+		};
+		744436932CDF923B00B28D37 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.4.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		7444368F2CDF906A00B28D37 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7444368E2CDF906A00B28D37 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+		744436912CDF906A00B28D37 /* SDWebImageMapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7444368E2CDF906A00B28D37 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImageMapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 7444363D2CD4297800B28D37 /* Project object */;
 }
