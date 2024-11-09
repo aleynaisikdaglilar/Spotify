@@ -34,6 +34,10 @@
 		7444368D2CDE104F00B28D37 /* SettingsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7444368C2CDE104F00B28D37 /* SettingsModels.swift */; };
 		744436902CDF906A00B28D37 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 7444368F2CDF906A00B28D37 /* SDWebImage */; };
 		744436922CDF906A00B28D37 /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 744436912CDF906A00B28D37 /* SDWebImageMapKit */; };
+		744436952CDFAF9700B28D37 /* APIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744436942CDFAF9700B28D37 /* APIImage.swift */; };
+		744436972CDFB9E500B28D37 /* NewReleasesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744436962CDFB9E500B28D37 /* NewReleasesResponse.swift */; };
+		744436992CDFC1CA00B28D37 /* FeaturedPlaylistsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744436982CDFC1CA00B28D37 /* FeaturedPlaylistsResponse.swift */; };
+		7444369B2CDFDDEC00B28D37 /* RecommendedGenresResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7444369A2CDFDDEB00B28D37 /* RecommendedGenresResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +68,10 @@
 		744436882CD7C41100B28D37 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		7444368A2CDB8B1200B28D37 /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
 		7444368C2CDE104F00B28D37 /* SettingsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModels.swift; sourceTree = "<group>"; };
+		744436942CDFAF9700B28D37 /* APIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIImage.swift; sourceTree = "<group>"; };
+		744436962CDFB9E500B28D37 /* NewReleasesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewReleasesResponse.swift; sourceTree = "<group>"; };
+		744436982CDFC1CA00B28D37 /* FeaturedPlaylistsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedPlaylistsResponse.swift; sourceTree = "<group>"; };
+		7444369A2CDFDDEB00B28D37 /* RecommendedGenresResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedGenresResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +143,10 @@
 				744436862CD4EA7300B28D37 /* UserProfile.swift */,
 				7444368A2CDB8B1200B28D37 /* AuthResponse.swift */,
 				7444368C2CDE104F00B28D37 /* SettingsModels.swift */,
+				744436942CDFAF9700B28D37 /* APIImage.swift */,
+				744436962CDFB9E500B28D37 /* NewReleasesResponse.swift */,
+				744436982CDFC1CA00B28D37 /* FeaturedPlaylistsResponse.swift */,
+				7444369A2CDFDDEB00B28D37 /* RecommendedGenresResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -277,6 +289,7 @@
 				7444366F2CD4E77800B28D37 /* WelcomeViewController.swift in Sources */,
 				744436732CD4E81300B28D37 /* ProfileViewController.swift in Sources */,
 				744436632CD42D4B00B28D37 /* TabBarViewController.swift in Sources */,
+				744436972CDFB9E500B28D37 /* NewReleasesResponse.swift in Sources */,
 				7444367F2CD4E8EC00B28D37 /* HapticsManager.swift in Sources */,
 				7444368B2CDB8B1200B28D37 /* AuthResponse.swift in Sources */,
 				744436832CD4EA5C00B28D37 /* AudioTrack.swift in Sources */,
@@ -290,9 +303,12 @@
 				7444368D2CDE104F00B28D37 /* SettingsModels.swift in Sources */,
 				744436772CD4E86400B28D37 /* PlaylistViewController.swift in Sources */,
 				7444364B2CD4297800B28D37 /* SceneDelegate.swift in Sources */,
+				744436952CDFAF9700B28D37 /* APIImage.swift in Sources */,
 				744436752CD4E81E00B28D37 /* PlayerViewController.swift in Sources */,
 				7444367D2CD4E8D900B28D37 /* APICaller.swift in Sources */,
+				744436992CDFC1CA00B28D37 /* FeaturedPlaylistsResponse.swift in Sources */,
 				744436712CD4E79100B28D37 /* SettingsViewController.swift in Sources */,
+				7444369B2CDFDDEC00B28D37 /* RecommendedGenresResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

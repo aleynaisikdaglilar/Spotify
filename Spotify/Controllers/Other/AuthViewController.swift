@@ -61,12 +61,12 @@ class AuthViewController: UIViewController, WKNavigationDelegate {
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         
         if let url = navigationAction.request.url {
-            print("Navigating to URL: \(url.absoluteString)")
+//            print("Navigating to URL: \(url.absoluteString)")
             
             // Kod parametresini içeren URL kontrolü
             if url.absoluteString.starts(with: "spotify-ios-quick-start://spotify-login-callback") {
                 if let code = URLComponents(string: url.absoluteString)?.queryItems?.first(where: { $0.name == "code" })?.value {
-                    print("Code: \(code)")
+//                    print("Code: \(code)")
                     webView.isHidden = true
                     AuthManager.shared.exchangeCodeForToken(code: code) { [weak self] success in
                         DispatchQueue.main.async {
