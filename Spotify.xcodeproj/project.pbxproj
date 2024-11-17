@@ -53,6 +53,7 @@
 		74DBC5D42CEA522100D36A7D /* TitleHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DBC5D32CEA522000D36A7D /* TitleHeaderCollectionReusableView.swift */; };
 		74DBC5D62CEA7F8700D36A7D /* AlbumTrackCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DBC5D52CEA7F8700D36A7D /* AlbumTrackCollectionViewCell.swift */; };
 		74DBC5D82CEA80D600D36A7D /* AlbumCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DBC5D72CEA80D600D36A7D /* AlbumCollectionViewCellViewModel.swift */; };
+		74DBC5DA2CEA922400D36A7D /* GenreCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DBC5D92CEA922400D36A7D /* GenreCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -102,6 +103,7 @@
 		74DBC5D32CEA522000D36A7D /* TitleHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
 		74DBC5D52CEA7F8700D36A7D /* AlbumTrackCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumTrackCollectionViewCell.swift; sourceTree = "<group>"; };
 		74DBC5D72CEA80D600D36A7D /* AlbumCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
+		74DBC5D92CEA922400D36A7D /* GenreCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +165,7 @@
 				744436532CD4297A00B28D37 /* LaunchScreen.storyboard */,
 				745B215F2CE76C6300B57001 /* PlaylistHeaderCollectionReusableView.swift */,
 				74DBC5D32CEA522000D36A7D /* TitleHeaderCollectionReusableView.swift */,
+				74DBC5D92CEA922400D36A7D /* GenreCollectionViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -353,6 +356,7 @@
 				744436A42CE174D700B28D37 /* RecommendedTrackCollectionViewCell.swift in Sources */,
 				7444367F2CD4E8EC00B28D37 /* HapticsManager.swift in Sources */,
 				7444368B2CDB8B1200B28D37 /* AuthResponse.swift in Sources */,
+				74DBC5DA2CEA922400D36A7D /* GenreCollectionViewCell.swift in Sources */,
 				744436832CD4EA5C00B28D37 /* AudioTrack.swift in Sources */,
 				7444369D2CDFE41800B28D37 /* RecommendationsResponse.swift in Sources */,
 				74DBC5D62CEA7F8700D36A7D /* AlbumTrackCollectionViewCell.swift in Sources */,
