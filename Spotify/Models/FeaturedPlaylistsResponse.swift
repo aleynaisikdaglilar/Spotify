@@ -17,6 +17,11 @@ struct CategoryPlaylistsResponse: Codable {
 
 struct PlaylistResponse: Codable {
     let items: [Playlist]
+    
+    init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            self.items = try container.decodeIfPresent([Playlist].self, forKey: .items) ?? []
+        }
 }
 
 struct User: Codable {

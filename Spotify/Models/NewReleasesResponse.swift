@@ -13,15 +13,29 @@ struct NewReleasesResponse: Codable {
 
 struct AlbumsResponse: Codable {
     let items: [Album]
+    
+    init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            var itemsArray = try container.nestedUnkeyedContainer(forKey: .items)
+            var decodedItems: [Album] = []
+
+            while !itemsArray.isAtEnd {
+                if let item = try? itemsArray.decode(Album.self) { // Decode edilebilen değerleri al
+                    decodedItems.append(item)
+                }
+            }
+
+            self.items = decodedItems
+        }
 }
 
 struct Album: Codable {
-    let album_type: String
-    let available_markets: [String]
-    let id: String
-    let images: [APIImage]
-    let name: String
-    let release_date: String
-    let total_tracks: Int
-    let artists: [Artist]
+    let album_type: String?
+    let available_markets: [String]?
+    let id: String?
+    let images: [APIImage]?
+    let name: String?
+    let release_date: String?
+    let total_tracks: Int?
+    let artists: [Artist]?
 }

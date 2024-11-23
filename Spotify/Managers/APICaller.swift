@@ -23,7 +23,7 @@ final class APICaller {
     //    MARK: - Albums
     
     public func getAlbumDetails(for album: Album, completion: @escaping(Result<AlbumDetailsResponse, Error>) -> Void) {
-        createRequest(with: URL(string: Constants.baseAPIURL + "/albums/" + album.id), type: .GET) { request in
+        createRequest(with: URL(string: Constants.baseAPIURL + "/albums/" + (album.id ?? "id nil")), type: .GET) { request in
             let task = URLSession.shared.dataTask(with: request) { data, _, error in
                 guard let data = data, error == nil else {
                     completion(.failure(APIError.failedToGetData))
@@ -44,7 +44,7 @@ final class APICaller {
     //    MARK: - Playlists
     
     public func getPlaylistDetails(for playlist: Playlist, completion: @escaping(Result<PlaylistDetailsResponse, Error>) -> Void) {
-        createRequest(with: URL(string: Constants.baseAPIURL + "/playlists/" + playlist.id), type: .GET) { request in
+        createRequest(with: URL(string: Constants.baseAPIURL + "/playlists/" + (playlist.id ?? "0")), type: .GET) { request in
             let task = URLSession.shared.dataTask(with: request) { data, _, error in
                 guard let data = data, error == nil else {
                     completion(.failure(APIError.failedToGetData))
@@ -197,6 +197,60 @@ final class APICaller {
                     completion(.success(result.playlists.items))
                 } catch {
                     completion(.failure(error))
+                }
+            }
+            task.resume()
+        }
+    }
+    
+    //    MARK: - Search
+    
+    public func search(with query: String, completion: @escaping(Result<[SearchResult], Error>) -> Void) {
+        createRequest(with: URL(string: Constants.baseAPIURL+"/search?limit=15&type=album,artist,playlist,track&q=\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")"), type: .GET) { request in
+            let task = URLSession.shared.dataTask(with: request) { data, _, error in
+                guard let data = data, error == nil else {
+                    completion(.failure(APIError.failedToGetData))
+                    return
+                }
+                
+                do {
+//                    if let jsonString = String(data: data, encoding: .utf8) {
+//                        print("Raw JSON Response: \(jsonString)")
+//                    }
+                    
+                    
+                    let result = try JSONDecoder().decode(SearchResultResponse.self, from: data)
+//                    print(result)
+                    
+                    var searchResults: [SearchResult] = []
+                    
+                    if let tracks = result.tracks?.items {
+                        searchResults.append(contentsOf: tracks.compactMap({ .track(model: $0) }))
+                    }
+                    
+                    if let albums = result.albums?.items?.compactMap({ $0 }) { // `null` değerleri atlar
+                        searchResults.append(contentsOf: albums.compactMap({ .album(model: $0) }))
+                    }
+                    
+                    if let artists = result.artists?.items {
+                        searchResults.append(contentsOf: artists.compactMap({ .artist(model: $0) }))
+                    }
+                    
+                    if let playlists = result.playlists?.items?.compactMap({ $0 }) { // `null` olanları atla
+                            searchResults.append(contentsOf: playlists.compactMap({ .playlist(model: $0) }))
+                        }
+                    
+                    completion(.success(searchResults))
+                } catch let DecodingError.dataCorrupted(context) {
+                    print("Data corrupted: \(context)")
+                } catch let DecodingError.keyNotFound(key, context) {
+                    print("Missing key: \(key) in context: \(context)")
+                } catch let DecodingError.typeMismatch(type, context) {
+                    print("Type mismatch: \(type) in context: \(context)")
+                } catch let DecodingError.valueNotFound(value, context) {
+                    print("Value not found: \(value) in context: \(context)")
+                } catch {
+                    print("Unexpected error: \(error)")
                 }
             }
             task.resume()

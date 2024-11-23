@@ -19,7 +19,7 @@ enum BrowseSectionType {
         case .featuredPlaylists:
             return "Featured Playlists"
         case .recommendedTracks:
-         return "Recommended"
+            return "Recommended"
         }
     }
 }
@@ -73,67 +73,121 @@ class HomeViewController: UIViewController {
         collectionView.backgroundColor = .systemBackground
     }
     
+    //    private func fetchData() {
+    //        let group = DispatchGroup()
+    //        group.enter()
+    //        group.enter()
+    //        group.enter()
+    //
+    //        var newReleases: NewReleasesResponse?
+    //        var featuredPlaylist: FeaturedPlaylistsResponse?
+    //        var recommendations: RecommendationsResponse?
+    //
+    //        //        New Releases
+    //        APICaller.shared.getNewReleases { result in
+    //            defer {
+    //                group.leave()
+    //            }
+    //            switch result {
+    //            case .success(let model):
+    //                newReleases = model
+    //            case .failure(let error):
+    //                print(error.localizedDescription)
+    //            }
+    //        }
+    //
+    //        //        Featured Playlists
+    //        APICaller.shared.getFeaturedPlaylists { result in
+    //            defer {
+    //                group.leave()
+    //            }
+    //            switch result {
+    //            case .success(let model):
+    //                featuredPlaylist = model
+    //            case .failure(let error):
+    //                print(error.localizedDescription)
+    //            }
+    //        }
+    //
+    //        //        Recommended Tracks
+    //        APICaller.shared.getRecommendedGenders { result in
+    //            switch result {
+    //            case .success(let model):
+    //                let genres = model.genres
+    //                var seeds = Set<String>()
+    //                while seeds.count < 5 {
+    //                    if let random = genres.randomElement() {
+    //                        seeds.insert(random)
+    //                    }
+    //                }
+    //
+    //                APICaller.shared.getRecommendations(genres: seeds) { recommendedResult in
+    //                    defer {
+    //                        group.leave()
+    //                    }
+    //                    switch recommendedResult {
+    //                    case .success(let model):
+    //                        recommendations = model
+    //                    case .failure(let error):
+    //                        print(error.localizedDescription)
+    //                    }
+    //                }
+    //            case .failure(let error):
+    //                print(error.localizedDescription)
+    //            }
+    //        }
+    //
+    //        group.notify(queue: .main) {
+    //            guard let newAlbums = newReleases?.albums.items,
+    //                  let playlists = featuredPlaylist?.playlists.items,
+    //                  let tracks = recommendations?.tracks else {
+    //                fatalError("Models are nil")
+    //                return
+    //            }
+    //
+    //            self.configureModels(newAlbums: newAlbums, playlists: playlists, tracks: tracks)
+    //        }
+    //    }
+    
+    
     private func fetchData() {
         let group = DispatchGroup()
-        group.enter()
-        group.enter()
-        group.enter()
         
         var newReleases: NewReleasesResponse?
         var featuredPlaylist: FeaturedPlaylistsResponse?
         var recommendations: RecommendationsResponse?
         
-        //        New Releases
-        APICaller.shared.getNewReleases { result in
-            defer {
-                group.leave()
-            }
+        // Fetch all data
+        group.enter()
+        fetchNewReleases { result in
+            defer { group.leave() }
             switch result {
             case .success(let model):
                 newReleases = model
             case .failure(let error):
-                print(error.localizedDescription)
+                print("Failed to fetch new releases: \(error.localizedDescription)")
             }
         }
         
-        //        Featured Playlists
-        APICaller.shared.getFeaturedPlaylists { result in
-            defer {
-                group.leave()
-            }
+        group.enter()
+        fetchFeaturedPlaylists { result in
+            defer { group.leave() }
             switch result {
             case .success(let model):
                 featuredPlaylist = model
             case .failure(let error):
-                print(error.localizedDescription)
+                print("Failed to fetch featured playlists: \(error.localizedDescription)")
             }
         }
         
-        //        Recommended Tracks
-        APICaller.shared.getRecommendedGenders { result in
+        group.enter()
+        fetchRecommendations { result in
+            defer { group.leave() }
             switch result {
             case .success(let model):
-                let genres = model.genres
-                var seeds = Set<String>()
-                while seeds.count < 5 {
-                    if let random = genres.randomElement() {
-                        seeds.insert(random)
-                    }
-                }
-                
-                APICaller.shared.getRecommendations(genres: seeds) { recommendedResult in
-                    defer {
-                        group.leave()
-                    }
-                    switch recommendedResult {
-                    case .success(let model):
-                        recommendations = model
-                    case .failure(let error):
-                        print(error.localizedDescription)
-                    }
-                }
+                recommendations = model
             case .failure(let error):
-                print(error.localizedDescription)
+                print("Failed to fetch recommendations: \(error.localizedDescription)")
             }
         }
         
@@ -141,7 +195,7 @@ class HomeViewController: UIViewController {
             guard let newAlbums = newReleases?.albums.items,
                   let playlists = featuredPlaylist?.playlists.items,
                   let tracks = recommendations?.tracks else {
-                fatalError("Models are nil")
+                print("One or more models are nil.")
                 return
             }
             
@@ -149,28 +203,56 @@ class HomeViewController: UIViewController {
         }
     }
     
+    // MARK: - API Call Methods
+    
+    private func fetchNewReleases(completion: @escaping (Result<NewReleasesResponse, Error>) -> Void) {
+        APICaller.shared.getNewReleases(completion: completion)
+    }
+    
+    private func fetchFeaturedPlaylists(completion: @escaping (Result<FeaturedPlaylistsResponse, Error>) -> Void) {
+        APICaller.shared.getFeaturedPlaylists(completion: completion)
+    }
+    
+    private func fetchRecommendations(completion: @escaping (Result<RecommendationsResponse, Error>) -> Void) {
+        APICaller.shared.getRecommendedGenders { result in
+            switch result {
+            case .success(let model):
+                let genres = model.genres
+                var seeds = Set<String>()
+                while seeds.count < 5, let random = genres.randomElement() {
+                    seeds.insert(random)
+                }
+                
+                APICaller.shared.getRecommendations(genres: seeds, completion: completion)
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    
     private func configureModels(newAlbums: [Album], playlists: [Playlist], tracks: [AudioTrack]) {
         self.newAlbums = newAlbums
         self.playlists = playlists
         self.tracks = tracks
         
         sections.append(.newReleases(viewModels: newAlbums.compactMap({
-            return NewReleasesCellViewModel(name: $0.name,
-                                            artworkURL: URL(string: $0.images.first?.url ?? ""),
-                                            numberOfTracks: $0.total_tracks,
-                                            artistName: $0.artists.first?.name ?? "-"
+            return NewReleasesCellViewModel(name: $0.name ?? "nil",
+                                            artworkURL: URL(string: $0.images?.first?.url ?? "https://upload.wikimedia.org/wikipedia/commons/8/84/Spotify_icon.svg"),
+                                            numberOfTracks: $0.total_tracks ?? 0,
+                                            artistName: $0.artists?.first?.name ?? "-"
             )
         })))
         sections.append(.featuredPlaylists(viewModels: playlists.compactMap({
-            return FeaturedPlaylistCellViewModel(name: $0.name,
-                                                 artworkURL: URL(string: $0.images.first?.url ?? ""),
-                                                 creatorName: $0.owner.display_name
+            return FeaturedPlaylistCellViewModel(name: $0.name ?? "playlist",
+                                                 artworkURL: URL(string: $0.images?.first?.url ?? "https://upload.wikimedia.org/wikipedia/commons/8/84/Spotify_icon.svg"),
+                                                 creatorName: $0.owner?.display_name ?? "-"
             )
         })))
         sections.append(.recommendedTracks(viewModels: tracks.compactMap({
-            return RecommendedTrackCellViewModel(name: $0.name,
-                                                 artistName: $0.artists.first?.name ?? "-",
-                                                 artworkURL: URL(string: $0.album?.images.first?.url ?? ""))
+            return RecommendedTrackCellViewModel(name: $0.name ?? "track",
+                                                 artistName: $0.artists?.first?.name ?? "-",
+                                                 artworkURL: URL(string: $0.album?.images?.first?.url ?? "https://upload.wikimedia.org/wikipedia/commons/8/84/Spotify_icon.svg"))
         })))
         collectionView.reloadData()
     }

@@ -79,9 +79,9 @@ class PlaylistViewController: UIViewController {
                     //                RecommendedTrackCellViewModel
                     self?.viewModels = model.tracks.items.compactMap({
                         RecommendedTrackCellViewModel(
-                            name: $0.track.name,
-                            artistName: $0.track.artists.first?.name ?? "-",
-                            artworkURL: URL(string: $0.track.album?.images.first?.url ?? "")
+                            name: $0.track.name ?? "track",
+                            artistName: $0.track.artists?.first?.name ?? "-",
+                            artworkURL: URL(string: $0.track.album?.images?.first?.url ?? "https://upload.wikimedia.org/wikipedia/commons/8/84/Spotify_icon.svg")
                         )
                     })
                     self?.collectionView.reloadData()
@@ -98,7 +98,7 @@ class PlaylistViewController: UIViewController {
     
     @objc
     private func didTapShare() {
-        guard let url = URL(string: playlist.external_urls["spotify"] ?? "") else {
+        guard let url = URL(string: playlist.external_urls?["spotify"] ?? "") else {
             return
         }
         let vc = UIActivityViewController(
@@ -148,8 +148,8 @@ extension PlaylistViewController: UICollectionViewDelegate, UICollectionViewData
         let headerViewModel = PlaylistHeaderViewViewModel(
             name: playlist.name,
             description: playlist.description,
-            ownerName: playlist.owner.display_name,
-            artworkURL: URL(string: playlist.images.first?.url ?? "")
+            ownerName: playlist.owner?.display_name,
+            artworkURL: URL(string: playlist.images?.first?.url ?? "https://upload.wikimedia.org/wikipedia/commons/8/84/Spotify_icon.svg")
         )
         header.configure(with: headerViewModel)
         header.delegate = self

@@ -78,8 +78,8 @@ class AlbumViewController: UIViewController {
                 case .success(let model):
                     self?.viewModels = model.tracks.items.compactMap({
                         AlbumCollectionViewCellViewModel(
-                            name: $0.name,
-                            artistName: $0.artists.first?.name ?? "-"
+                            name: $0.name ?? "track",
+                            artistName: $0.artists?.first?.name ?? "-"
                         )
                     })
                     self?.collectionView.reloadData()
@@ -128,9 +128,9 @@ extension AlbumViewController: UICollectionViewDelegate, UICollectionViewDataSou
         }
         let headerViewModel = PlaylistHeaderViewViewModel(
             name: album.name,
-            description: "Release Date: \(String.formattedDate(string: album.release_date))",
-            ownerName: album.artists.first?.name,
-            artworkURL: URL(string: album.images.first?.url ?? "")
+            description: "Release Date: \(String.formattedDate(string: album.release_date ?? "nil"))",
+            ownerName: album.artists?.first?.name,
+            artworkURL: URL(string: album.images?.first?.url ?? "https://upload.wikimedia.org/wikipedia/commons/8/84/Spotify_icon.svg")
         )
         header.configure(with: headerViewModel)
         header.delegate = self

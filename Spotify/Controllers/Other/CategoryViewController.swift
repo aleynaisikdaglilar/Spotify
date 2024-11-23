@@ -86,9 +86,9 @@ extension CategoryViewController: UICollectionViewDelegate, UICollectionViewData
         }
         let playlist = playlists[indexPath.row]
         cell.configure(with: FeaturedPlaylistCellViewModel(
-            name: playlist.name,
-            artworkURL: URL(string: playlist.images.first?.url ?? ""),
-            creatorName: playlist.owner.display_name
+            name: playlist.name ?? "playlist",
+            artworkURL: URL(string: playlist.images?.first?.url ?? "https://upload.wikimedia.org/wikipedia/commons/8/84/Spotify_icon.svg"),
+            creatorName: playlist.owner?.display_name ?? "-"
         )
         )
         return cell
